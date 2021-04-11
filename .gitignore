@@ -1,0 +1,8 @@
+coverage
+node_modules
+npm-debug.log
+.env
+dist
+*.env
+.npmrc
+logs
