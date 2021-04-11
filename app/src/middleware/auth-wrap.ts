@@ -2,7 +2,7 @@ import Express from 'express'
 import { authToken } from '../config'
 import logger from '../lib/logger'
 
-const fileIdentity = 'middleware::auth-wrap'
+const fileIdentity = 'app::src::middleware::auth-wrap'
 
 export default (fn: Express.Handler) => (req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
     const funcPath = `${fileIdentity}::default:: `
