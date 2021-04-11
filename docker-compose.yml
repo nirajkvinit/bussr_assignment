@@ -1,0 +1,24 @@
+version: "3"
+services:
+  node-api:
+    restart: always
+    build:
+      context: .
+    ports:
+      - "4000:4000"
+    environment:
+      - ENVIRONMENT=production
+      - NODE_ENV=production
+      - LOG_LEVEL=debug
+      - AUTH_TOKEN=somesecret
+      - MONGO_URI=mongodb://localhost:27017/bussr
+    container_name: node-api
+    links:
+      - mongo-db
+  mongo-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: mongo-db
+    volumes:
+      - ./db/:/data/db
