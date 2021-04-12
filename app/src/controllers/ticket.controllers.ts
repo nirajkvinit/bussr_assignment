@@ -29,26 +29,26 @@ export const createOne = () => async (req: Request, res: Response) => {
     const funcPath = `${fileIdentity}createOne:: `
     const { body } = req
 
-    const { creationDate, customerName, performanceTitle, performanceTime, ticketPrice } = body
+    const { bookingDate, customerName, performanceTitle, performanceDateTime, ticketPrice } = body
 
     const validation = validateTicketInput(body)
 
     if (!validation.error) {
         try {
             const newTicket = await Ticket.create({
-                creationDate,
+                bookingDate,
                 customerName,
-                performanceTime,
+                performanceDateTime,
                 performanceTitle,
                 ticketPrice,
             })
             logger.info(`${funcPath} ticket creation successful! ${JSON.stringify(newTicket)}`)
 
             success(req, res, newTicket)
-        } catch (error) {
+        } catch (err) {
             logger.error(`${funcPath} error creating ticket`)
-            logger.error(error)
-            error(req, res, error)
+            logger.error(err)
+            error(req, res, err)
         }
     } else {
         logger.error(`${funcPath} validation error: ${JSON.stringify(validation)}`)
