@@ -27,6 +27,7 @@ export const error = (req: Express.Request, res: Express.Response, err: any, sta
     const funcPath = `${fileIdentity}::error:: `
     if (err instanceof ErrorHelper) {
         const { message, httpStatusCode } = err
+
         const errorResponse = {
             data: null,
             message,

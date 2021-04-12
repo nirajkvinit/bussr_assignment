@@ -1,11 +1,4 @@
-import mongoose, { Schema, Document, SchemaType } from 'mongoose'
-
-export interface IVenue extends Document {
-    venueName: string
-    street: string
-    city: string
-    postCode: string
-}
+import mongoose, { Schema, Document } from 'mongoose'
 
 export interface ITicket extends Document {
     creationDate: Date
@@ -13,7 +6,6 @@ export interface ITicket extends Document {
     performanceTitle: string
     performanceTime: Date
     ticketPrice: number
-    venue?: IVenue
 }
 
 const TicketSchema: Schema = new Schema({
@@ -22,12 +14,6 @@ const TicketSchema: Schema = new Schema({
     performanceTitle: { type: String, required: true },
     performanceTime: { type: Date, required: true },
     ticketPrice: { type: Number, required: true },
-    venue: {
-        venueName: { type: String },
-        street: { type: String },
-        city: { type: String },
-        postCode: { type: String },
-    },
 })
 
 export default mongoose.model<ITicket>('Ticket', TicketSchema)
