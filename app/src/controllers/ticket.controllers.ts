@@ -9,6 +9,22 @@ const fileIdentity = 'app::src::controllers::ticker.controllers::'
 
 export const getOne = () => async (req: Request, res: Response) => {
     const funcPath = `${fileIdentity}getOne:: `
+
+    const ticketId = encodeURIComponent(req.params.id)
+    try {
+        const foundTicket = await Ticket.find({ _id: ticketId })
+
+        if (foundTicket.length) {
+            success(req, res, foundTicket[0])
+        } else {
+            logger.error(`${funcPath} error retrieving ticket for id ${ticketId}`)
+            error(req, res, { message: `error retrieving ticket for id ${ticketId}` }, 404)
+        }
+    } catch (err) {
+        logger.error(`${funcPath} error retrieving ticket for id ${ticketId}`)
+        logger.error(err)
+        error(req, res, { message: `error retrieving ticket for id ${ticketId}` })
+    }
 }
 
 export const getAll = () => async (req: Request, res: Response) => {
@@ -59,6 +75,12 @@ export const createOne = () => async (req: Request, res: Response) => {
 
 export const updateOne = () => async (req: Request, res: Response) => {
     const funcPath = `${fileIdentity}updateOne:: `
+    const { body } = req
+    const ticketId = encodeURIComponent(req.params.id)
+
+    const { bookingDate, customerName, performanceTitle, performanceDateTime, ticketPrice } = body
+
+    const validation = validateTicketInput(body)
 }
 
 export const deleteOne = () => async (req: Request, res: Response) => {

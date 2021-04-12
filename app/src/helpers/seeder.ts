@@ -22,7 +22,7 @@ export const seed = async (count: number = 100) => {
         ]
 
         const pastDateTime = faker.date.past(1, performanceDateTime)
-        const randomBookingDate = randomTime(pastDateTime, performanceDateTime)
+        const randomBookingDate = randomTime(pastDateTime, new Date())
 
         try {
             await Ticket.create({
@@ -40,7 +40,7 @@ export const seed = async (count: number = 100) => {
             logger.error(error)
         }
     }
-    process.exit(1)
+    process.exit()
 }
 
 const randomTime = (start: Date, end: Date) => {
