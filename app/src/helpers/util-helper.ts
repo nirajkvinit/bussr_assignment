@@ -12,3 +12,17 @@ export const validateTicketInput = (ticketInput: ITicket) => {
 
     return schema.validate(ticketInput)
 }
+
+export interface ITicketUpdate {
+    bookingDate: Date
+    ticketId: string
+}
+
+export const validateTicketBookingDate = (ticketInput: ITicketUpdate) => {
+    const schema = Joi.object().keys({
+        bookingDate: Joi.date().required(),
+        ticketId: Joi.string().min(5).required(),
+    })
+
+    return schema.validate(ticketInput)
+}

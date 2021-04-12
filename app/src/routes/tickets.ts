@@ -14,7 +14,7 @@ export default (app: Application) => {
     app.post(`${basePath}`, wrap(createOne()))
 
     // update a ticket
-    app.put(`${basePath}`, wrap(updateOne()))
+    app.put(`${basePath}/:id`, wrap(updateOne()))
 
     // delete a ticket
     app.delete(`${basePath}/:id`, wrap(deleteOne()))
